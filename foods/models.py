@@ -29,7 +29,6 @@ class Ingredient(models.Model):
 class Food(models.Model):
     category = models.ForeignKey(Category, on_delete=models.RESTRICT, related_name="foods", verbose_name=_("category"))
     name = models.CharField(max_length=40, verbose_name=_("food"))
-    ingredients = models.ManyToManyField(Ingredient, related_name="foods", verbose_name=_("ingredients"))
     price = models.FloatField(verbose_name=_("price"))
     photo = models.ImageField(verbose_name=_("photo"))
     photo_alt_text = models.CharField(max_length=50, verbose_name=_("photo alt text"))
@@ -41,3 +40,17 @@ class Food(models.Model):
     class Meta:
         verbose_name = _("Food")
         verbose_name_plural = _("Foods")
+
+
+class FoodIngredient(models.Model):
+    food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name="ingredients", verbose_name="food")
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.RESTRICT, related_name="foods",
+                                   verbose_name=_("ingredient"))
+    amount = models.CharField(max_length=10, blank=True, null=True, verbose_name=_("amount"))
+
+    def __str__(self):
+        return f"{self.food} - {self.ingredient}"
+
+    class Meta:
+        verbose_name = _("FoodIngredient")
+        verbose_name_plural = _("FoodIngredients")
