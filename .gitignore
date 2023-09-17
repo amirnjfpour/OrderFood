@@ -993,3 +993,4 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm+all,pycharm+iml,pycharm,django,venv,visualstudio,jetbrains,jetbrains+all,jetbrains+iml
+/accounts/migrations/
