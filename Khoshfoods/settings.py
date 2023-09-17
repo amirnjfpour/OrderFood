@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "django_filters",
 
     "accounts",
-
+    "foods",
 ]
 
 AUTH_USER_MODEL = 'accounts.BaseUser'
