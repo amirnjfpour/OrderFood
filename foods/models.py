@@ -33,6 +33,7 @@ class Food(models.Model):
     photo = models.ImageField(verbose_name=_("photo"))
     photo_alt_text = models.CharField(max_length=50, verbose_name=_("photo alt text"))
     is_available = models.BooleanField(default=True, verbose_name=_("is available"))
+    average_score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name=_("average score"))
 
     def __str__(self):
         return self.name
@@ -52,5 +53,5 @@ class FoodIngredient(models.Model):
         return f"{self.food} - {self.ingredient}"
 
     class Meta:
-        verbose_name = _("FoodIngredient")
-        verbose_name_plural = _("FoodIngredients")
+        verbose_name = _("Food Ingredient")
+        verbose_name_plural = _("Food Ingredients")
