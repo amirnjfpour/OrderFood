@@ -7,7 +7,8 @@ from foods.models import Food
 
 
 class Order(models.Model):
-    STATUSES = (("PRP", _("Preparing")),
+    STATUSES = (("IPR", _("In Progress")),
+                ("PRP", _("Preparing")),
                 ("RDY", _("Ready")),
                 ("RCV", _("Received")))
     user = models.ForeignKey(BaseUser, on_delete=models.RESTRICT, related_name="orders", verbose_name=_("user"))
