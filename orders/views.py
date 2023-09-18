@@ -34,3 +34,17 @@ class AddItemToOrder(APIView):
         order.overall_price += added_price
         order.save()
         return Response({"message": "done"}, status=status.HTTP_200_OK)
+
+
+class SubmitOrderView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def patch(self, request):
+        user = request.user
+        if not Order.objects.filter(user=user, status="IPR").exists():
+            return Response({"message": "you don't have any in progress order"}, status=status.HTTP_400_BAD_REQUEST)
+        order = Order.objects.filter(user=user, status="IPR").first()
+        order.status = "PRP"
+        order.save()
+        return Response({"message": "done"}, status=status.HTTP_200_OK)
+
