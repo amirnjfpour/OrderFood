@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "accounts",
     "foods",
     "feedback",
+    "orders",
 ]
 
 AUTH_USER_MODEL = 'accounts.BaseUser'

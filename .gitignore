@@ -996,3 +996,4 @@ FodyWeavers.xsd
 /accounts/migrations/
 /foods/migrations/
 /feedback/migrations/
+/orders/migrations/
