@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 from django.utils.translation import gettext_lazy as _
 
 
@@ -37,6 +38,11 @@ class Food(models.Model):
 
     def __str__(self):
         return self.name
+
+    def update_average_score(self):
+        average_score = (self.comments.aggregate(Avg("score")))["score__avg"]
+        self.average_score = average_score
+        self.save()
 
     class Meta:
         verbose_name = _("Food")
