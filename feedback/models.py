@@ -12,6 +12,7 @@ class Comment(models.Model):
     text = models.TextField(verbose_name=_("text"))
     score = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)],
                                         verbose_name=_("score"))
+    public_name = models.CharField(max_length=20, verbose_name=_("public name"))
 
     def __str__(self):
         return f"{self.user} - {self.food}"
