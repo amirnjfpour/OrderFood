@@ -14,8 +14,8 @@ class Order(models.Model):
     user = models.ForeignKey(BaseUser, on_delete=models.RESTRICT, related_name="orders", verbose_name=_("user"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("created at"))
     modified_at = models.DateTimeField(auto_now=True, verbose_name=_("modified at"))
-    status = models.CharField(max_length=10, choices=STATUSES, verbose_name=_("status"))
-    overall_price = models.FloatField(verbose_name=_("overall price"))
+    status = models.CharField(max_length=10, choices=STATUSES, default="IPR", verbose_name=_("status"))
+    overall_price = models.FloatField(default=0, verbose_name=_("overall price"))
 
     def __str__(self):
         return f"{self.user} - {self.created_at}"
