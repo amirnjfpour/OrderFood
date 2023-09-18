@@ -1,10 +1,9 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.generics import ListAPIView
-
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from foods.filters import FoodFilter
 from foods.models import Food
-from foods.serializers import FoodListSerializer
+from foods.serializers import FoodListSerializer, RetrieveFoodSerializer
 
 
 class ListFoodView(ListAPIView):
@@ -14,3 +13,9 @@ class ListFoodView(ListAPIView):
     search_fields = ["name", "category__name"]
     ordering_fields = ["price"]
     filterset_class = FoodFilter
+
+
+class RetrieveFoodView(RetrieveAPIView):
+    queryset = Food.objects.filter(is_available=True)
+    serializer_class = RetrieveFoodSerializer
+    lookup_field = "pk"

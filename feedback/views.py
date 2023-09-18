@@ -1,14 +1,14 @@
 from rest_framework import status
-from rest_framework.generics import CreateAPIView, get_object_or_404
+from rest_framework.generics import CreateAPIView, get_object_or_404, RetrieveAPIView
 from rest_framework.response import Response
 
 from accounts.permissions import IsAuthenticated
-from feedback.serializers import CreateCommentSerializer
+from feedback.serializers import BaseCommentSerializer
 from foods.models import Food
 
 
 class AddCommentView(CreateAPIView):
-    serializer_class = CreateCommentSerializer
+    serializer_class = BaseCommentSerializer
     permission_classes = (IsAuthenticated,)
 
     def create(self, request, *args, **kwargs):

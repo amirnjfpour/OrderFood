@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from feedback.serializers import RetrieveCommentSerializer
 from foods.models import Food, FoodIngredient
 
 
@@ -20,3 +21,11 @@ class FoodListSerializer(serializers.ModelSerializer):
             else:
                 ingredients.append(f"{ingredient_object.amount} {ingredient_object.ingredient.name}")
         return ingredients
+
+
+class RetrieveFoodSerializer(serializers.ModelSerializer):
+    comments = RetrieveCommentSerializer(many=True)
+
+    class Meta:
+        model = Food
+        exclude = ("category", "is_available",)
