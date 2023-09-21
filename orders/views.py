@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 
 from accounts.permissions import IsAuthenticated
 from orders.models import Order, OrderItem
-from orders.serializers import AddOrderItemSerializer, BaseOrderSerializer
+from orders.serializers import AddOrderItemSerializer, BaseOrderSerializer, OrderSerializer
 
 
 class ChangeOrderItemView(APIView):
@@ -61,3 +61,14 @@ class SubmitOrderView(APIView):
         order.save()
         return Response({"message": "done"}, status=status.HTTP_200_OK)
 
+
+class GetCurrentOrderView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        user = request.user
+        if not Order.objects.filter(user=user, status="IPR").exists():
+            return Response({"message": "you don't have any in progress order"}, status=status.HTTP_400_BAD_REQUEST)
+        order = Order.objects.filter(user=user, status="IPR").first()
+        serializer = OrderSerializer(order)
+        return Response(serializer.data)
