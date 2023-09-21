@@ -1,8 +1,8 @@
 from django.urls import path
 
-from orders.views import AddItemToOrder, SubmitOrderView
+from orders.views import ChangeOrderItemView, SubmitOrderView
 
 urlpatterns = [
-    path("add-item/", AddItemToOrder.as_view(), name="add_item_to_order"),
+    path("order-item/", ChangeOrderItemView.as_view(), name="order_item"),
     path("submit-order/", SubmitOrderView.as_view(), name="submit_order"),
 ]
