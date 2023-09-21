@@ -1,7 +1,13 @@
 from rest_framework import serializers
 
 from feedback.serializers import RetrieveCommentSerializer
-from foods.models import Food, FoodIngredient
+from foods.models import Food, FoodIngredient, Category
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = "__all__"
 
 
 class FoodListSerializer(serializers.ModelSerializer):

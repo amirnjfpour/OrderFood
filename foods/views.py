@@ -1,9 +1,15 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+
 from foods.filters import FoodFilter
-from foods.models import Food
-from foods.serializers import FoodListSerializer, RetrieveFoodSerializer
+from foods.models import Food, Category
+from foods.serializers import FoodListSerializer, RetrieveFoodSerializer, CategorySerializer
+
+
+class ListCategoryView(ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 
 class ListFoodView(ListAPIView):
