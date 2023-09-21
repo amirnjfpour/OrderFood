@@ -1,4 +1,5 @@
 from rest_framework import status
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -72,3 +73,11 @@ class GetCurrentOrderView(APIView):
         order = Order.objects.filter(user=user, status="IPR").first()
         serializer = OrderSerializer(order)
         return Response(serializer.data)
+
+
+class ListUserOrders(ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user)
